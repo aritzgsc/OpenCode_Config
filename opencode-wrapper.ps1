@@ -15,8 +15,16 @@ $tunnelStop   = Join-Path $scriptRoot "hooks\tunnel\tunnel-stop.ps1"
 $envFile      = Join-Path $scriptRoot ".env"
 # DESACTIVADO con el bloque AHK de abajo. Ruta legacy: el script vive hoy en
 # hooks\deactivated\rate_limit\ (no se corrige el valor porque no se usa).
-$ahkScript    = "C:\Users\aritz.g.s\.config\opencode\hooks\rate_limit\rotar_ip.ahk"
-$opencodePath = "C:\Users\aritz.g.s\AppData\Roaming\npm\opencode.cmd"
+# Las rutas bajo el perfil del usuario se derivan de $env:USERPROFILE (con
+# fallback a la carpeta UserProfile del sistema / HOME / ~) para que el
+# wrapper funcione con cualquier usuario Windows sin literales hardcodeados.
+$userProfileDir = $env:USERPROFILE
+if ([string]::IsNullOrWhiteSpace($userProfileDir)) { $userProfileDir = [Environment]::GetFolderPath("UserProfile") }
+if ([string]::IsNullOrWhiteSpace($userProfileDir) -and (-not [string]::IsNullOrWhiteSpace($HOME))) { $userProfileDir = $HOME }
+if ([string]::IsNullOrWhiteSpace($userProfileDir)) { $userProfileDir = (Resolve-Path ~ -ErrorAction SilentlyContinue).Path }
+if ([string]::IsNullOrWhiteSpace($userProfileDir)) { throw "No se pudo resolver el perfil del usuario (USERPROFILE vacio)" }
+$ahkScript    = Join-Path $userProfileDir ".config\opencode\hooks\rate_limit\rotar_ip.ahk"
+$opencodePath = Join-Path $userProfileDir "AppData\Roaming\npm\opencode.cmd"
 
 if (-not (Test-Path -LiteralPath $tunnelStart -PathType Leaf)) { throw "No se encontro tunnel-start.ps1: $tunnelStart" }
 if (-not (Test-Path -LiteralPath $tunnelStop -PathType Leaf))  { throw "No se encontro tunnel-stop.ps1: $tunnelStop" }

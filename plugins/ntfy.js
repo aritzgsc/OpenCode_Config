@@ -410,7 +410,7 @@ function renderQuestionnaireHtml(entry) {
     try {
       const res = await fetch(location.pathname + location.search, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
         body: JSON.stringify({ answers }),
       })
       if (res.ok) {
@@ -521,7 +521,7 @@ function renderFormHtml(entry) {
     try {
       const res = await fetch(location.pathname + location.search, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
         body: JSON.stringify({ answer }),
       })
       if (res.ok) {

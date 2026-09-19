@@ -5,7 +5,7 @@
 # `addr` debe ser el MISMO puerto que `OPENCODE_NTFY_RELAY_PORT` en `.env`
 # (coherente con `.env.example` de la rama `config`). `basic_auth` protege
 # el relay en el borde (ngrok): es la capa de auth entrante del relay
-# (ver `README-services.md`); OBLIGATORIA en cuanto el relay se exponga.
+# (ver `README.md`); OBLIGATORIA en cuanto el relay se exponga.
 # El `authtoken` de esta cuenta vive solo en la variable `NGROK_AUTHTOKEN`
 # de su servicio nssm (ver `nssm-register.ps1`), nunca en este fichero
 # ni en el repo.

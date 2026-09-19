@@ -1,0 +1,20 @@
+# Ejemplo sanitizado — rama `services`.
+# Copiar a `C:/ProgramData/opencode/ngrok-opencode.yml` y sustituir cada
+# placeholder por el valor real LOCAL. El fichero real JAMÁS se versiona
+# (contiene dominio real y email personal en `allow_emails`).
+# Placeholders: `tu-dominio.ngrok-free.dev` = dominio ngrok reservado,
+# `tu@email.com` = email de la cuenta OAuth, `58941` = puerto local del
+# servidor explícito (coherente con `OPENCODE_SERVER_PORT` en `.env.example`
+# de la rama `config`). El `authtoken` de esta cuenta vive solo en la
+# máquina, nunca en el repo.
+
+version: "3"
+tunnels:
+  opencode-tunnel:
+    proto: http
+    addr: 58941
+    domain: tu-dominio.ngrok-free.dev
+    oauth:
+      provider: google
+      allow_emails:
+        - tu@email.com

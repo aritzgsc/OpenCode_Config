@@ -1,0 +1,19 @@
+# Ejemplo sanitizado — rama `services`.
+# Copiar a `C:/ProgramData/opencode/server.yml` y sustituir cada placeholder
+# por el valor real LOCAL. El fichero real JAMÁS se versiona (contiene
+# rutas locales y secretos: ver `.gitignore` de la rama `services`).
+# Placeholders: `***` = secreto/valor local, rutas genéricas `C:\ProgramData\opencode\...`.
+
+# Dónde escucha ntfy en local. Formato: "HOST:PUERTO" (p. ej. el puerto
+# local real de ntfy en esta máquina, nunca una URL pública). Ese mismo
+# puerto va en `addr` de `ngrok-ntfy.yml`.
+listen-http: "***"
+
+# Fichero local de caché de ntfy (ignorado en git vía `*.db`).
+cache-file: C:\ProgramData\opencode\cache.db
+
+# Acceso por defecto (política local, p. ej. denegar salvo autenticación).
+auth-default-access: "***"
+
+# Fichero local de usuarios ntfy (ignorado en git vía `*.db`).
+auth-file: C:\ProgramData\opencode\user.db

@@ -1,0 +1,14 @@
+# Ejemplo sanitizado — rama `services`.
+# Copiar a `C:/ProgramData/opencode/ngrok-ntfy.yml` y sustituir cada
+# placeholder por el valor real LOCAL. El fichero real JAMÁS se versiona
+# (contiene el dominio real del túnel ntfy).
+# `addr` debe ser el MISMO puerto local que `listen-http` en `server.yml`
+# (el `8090` de ejemplo se sustituye por ese puerto real). El `authtoken`
+# de esta cuenta vive solo en la máquina, nunca en el repo.
+
+version: "3"
+tunnels:
+  ntfy-tunnel:
+    proto: http
+    addr: 8090
+    domain: tu-dominio-ntfy.ngrok-free.dev

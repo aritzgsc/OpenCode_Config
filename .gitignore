@@ -1,0 +1,9 @@
+# Rama `services`: solo `examples/` se versiona. Los ficheros reales de
+# `C:/ProgramData/opencode` (copiados desde `examples/` con valores reales)
+# JAMÁS entran en git: los patrones anclados a raíz los ignoran sin tocar
+# `examples/`.
+*.db
+*.exe
+*.log
+/server.yml
+/ngrok-*.yml

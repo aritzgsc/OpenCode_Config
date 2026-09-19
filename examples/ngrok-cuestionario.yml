@@ -1,0 +1,18 @@
+# Ejemplo sanitizado — rama `services`.
+# Copiar a `C:/ProgramData/opencode/ngrok-cuestionario.yml` y sustituir cada
+# placeholder por el valor real LOCAL. El fichero real JAMÁS se versiona
+# (contiene dominio real + credenciales `basic_auth` reales).
+# `addr` debe ser el MISMO puerto que `OPENCODE_NTFY_RELAY_PORT` en `.env`
+# (coherente con `.env.example` de la rama `config`). `basic_auth` protege
+# el relay en el borde (ngrok): es la capa de auth entrante del relay
+# (ver `README-services.md`); OBLIGATORIA en cuanto el relay se exponga.
+# El `authtoken` de esta cuenta vive solo en la máquina, nunca en el repo.
+
+version: "3"
+tunnels:
+  cuestionario-tunnel:
+    proto: http
+    addr: 58942
+    domain: tu-dominio-cuestionario.ngrok-free.dev
+    basic_auth:
+      - "***:***"

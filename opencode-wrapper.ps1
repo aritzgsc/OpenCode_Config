@@ -151,27 +151,65 @@ try {
     # NOTA: no pasar --username: la TUI v2.0.8 lo rechaza ("Unrecognized flag").
     # La auth usa el usuario por defecto "opencode" (igual que el servidor).
 
-    $startArgs = @{
-        FilePath = $opencodePath
-        WorkingDirectory = (Get-Location).Path
-        ArgumentList = $tuiArgs
-        PassThru = $true
-        Wait = $true
-        RedirectStandardError = (Join-Path $scriptRoot "logs\wrapper_tui_stderr.log")
+    $wtAvailable = (Get-Command wt.exe -ErrorAction SilentlyContinue) -ne $null
+    $wtLaunched = $false
+
+    if ($wtAvailable) {
+        # Win10: la TUI heredaba conhost aunque el wrapper corra en WT.
+        # Se fuerza Windows Terminal con `wt -w 0 nt` (nueva pestana en la
+        # ventana actual). `wt` despega y sale: no sirve Wait, se espera por
+        # centinela (proceso opencode con --server a ESTE puerto).
+        # Cada arg va en comillas simples (con ' duplicado si trae comillas)
+        # para que wt lo reuna tal cual en una sola linea -Command.
+        # La pestana queda abierta al salir (veras los errores en pantalla).
+        $quotedArgs = @($tuiArgs) | ForEach-Object { "'" + ($_ -replace "'", "''") + "'" }
+        $tuiCommand = "& '" + ($opencodePath -replace "'", "''") + "' " + ($quotedArgs -join " ")
+        # `-d` fija el directorio de la pestana al actual (sin el, WT abre
+        # en USERPROFILE en vez de donde se lanzo el wrapper, como hacia cmd).
+        try {
+            Start-Process -FilePath "wt.exe" `
+                -ArgumentList @("-w", "0", "nt", "-d", (Get-Location).Path, "--", "powershell", "-NoExit", "-Command", $tuiCommand) `
+                -ErrorAction Stop
+            $wtLaunched = $true
+            Write-Host "[wrapper] TUI abierta en pestana de Windows Terminal. Al cerrarla se detiene todo."
+        }
+        catch {
+            Write-Warning "[wrapper] wt fallo ($($_.Exception.Message)). Lanzamiento clasico (puede abrir conhost)."
+        }
     }
 
-    $logDir = Join-Path $scriptRoot "logs"
-    if (-not (Test-Path -LiteralPath $logDir)) { New-Item -ItemType Directory -Path $logDir -Force | Out-Null }
+    if ($wtLaunched) {
+        do {
+            Start-Sleep -Seconds 2
+            $tuiAlive = Get-CimInstance Win32_Process -Filter "Name='opencode.exe'" -ErrorAction SilentlyContinue |
+                Where-Object { $_.CommandLine -like "*--server*$serverPort*" }
+        } while ($tuiAlive)
+        $exitCode = 0
+        Write-Host "[wrapper] TUI cerrada (codigo real no disponible via wt)."
+    }
+    else {
+        $startArgs = @{
+            FilePath = $opencodePath
+            WorkingDirectory = (Get-Location).Path
+            ArgumentList = $tuiArgs
+            PassThru = $true
+            Wait = $true
+            RedirectStandardError = (Join-Path $scriptRoot "logs\wrapper_tui_stderr.log")
+        }
 
-    $process = Start-Process @startArgs
-    $exitCode = $process.ExitCode
+        $logDir = Join-Path $scriptRoot "logs"
+        if (-not (Test-Path -LiteralPath $logDir)) { New-Item -ItemType Directory -Path $logDir -Force | Out-Null }
 
-    Write-Host "[wrapper] OpenCode termino con codigo $exitCode."
-    if ($exitCode -ne 0 -and $exitCode -ne -1073741510) {
-        $tuiErrLog = $startArgs.RedirectStandardError
-        if (Test-Path -LiteralPath $tuiErrLog) {
-            Write-Warning "[wrapper] Ultimas lineas de $tuiErrLog :"
-            Get-Content -LiteralPath $tuiErrLog -Tail 10 | ForEach-Object { Write-Warning "  $_" }
+        $process = Start-Process @startArgs
+        $exitCode = $process.ExitCode
+
+        Write-Host "[wrapper] OpenCode termino con codigo $exitCode."
+        if ($exitCode -ne 0 -and $exitCode -ne -1073741510) {
+            $tuiErrLog = $startArgs.RedirectStandardError
+            if (Test-Path -LiteralPath $tuiErrLog) {
+                Write-Warning "[wrapper] Ultimas lineas de $tuiErrLog :"
+                Get-Content -LiteralPath $tuiErrLog -Tail 10 | ForEach-Object { Write-Warning "  $_" }
+            }
         }
     }
 }

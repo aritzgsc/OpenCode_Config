@@ -1,31 +1,19 @@
 {
   "$schema": "https://opencode.ai/config.json",
 
-  // ── Modelos ────────────────────────────────────────────────────────────
-  // Mantén aquí tus modelos reales. Los agentes que no fijan "model" en su
-  // frontmatter heredan estos valores.
-  // NOTA V2: la raíz "model" no conserva "#variant" (ver docs /models).
-  // Antes era "...#xhigh"; el variant se selecciona por agente/comando.
-  "model": "opencode/muse-spark-1.3-contributor-free#xhigh",
+  // Modelo por defecto de las sesiones (formato proveedor/modelo).
+  // Pon el tuyo; en V2 la raíz no conserva "#variant".
+  "model": "provider/model",
 
-  // ── Agente por defecto ────────────────────────────────────────────────
-  // El pipeline completo solo arranca mediante /init. Para tareas puntuales
-  // se conserva el agente nativo "build".
+  // Agente por defecto: el pipeline completo arranca con /init.
   "default_agent": "build",
 
-  // ── Profundidad de subagentes ─────────────────────────────────────────
-  // FASE 1: @orchestrator -> @developer
-  // FASE 2: @developer -> @frontend-expert + @backend-expert
-  // 2 es el mínimo para permitir esta única capa de delegación anidada.
-  // NOTA V2: "subagent_depth" top-level está aceptado pero sin efecto;
-  // la forma nativa es "experimental.subagent_depth".
+  // Profundidad 2 = delegación anidada orchestrator -> developer -> expertos.
   "experimental": {
     "subagent_depth": 2
   },
 
-  // ── MCP ────────────────────────────────────────────────────────────────
-  // Playwright MCP queda preparado para añadir herramientas/contexto de
-  // navegador a todas las sesiones globales.
+  // Playwright MCP disponible en todas las sesiones.
   "mcp": {
     "servers": {
       "playwright": {
@@ -36,10 +24,7 @@
     }
   },
 
-  // ── Provider: Google / Antigravity ─────────────────────────────────────
-  // NOTA V2: "provider" → "providers"; "modalities" → "capabilities"
-  // (V2 exige además "tools" booleano: true, como los modelos de chat);
-  // "variants" objeto → array con "id" + "settings".
+  // Catálogo de modelos (Antigravity). Ajusta límites y variants a tu cuenta.
   "providers": {
     "google": {
       "models": {
@@ -89,7 +74,7 @@
     }
   },
 
-  // ── Watcher ────────────────────────────────────────────────────────────
+  // Rutas que el watcher ignora.
   "watcher": {
     "ignore": [
       "node_modules/**",

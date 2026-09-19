@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  // Migrado desde tui.jsonc (V1): "keybinds.messages_redo" → "keybinds.session.redo" (V2).
+  // Se desactiva para controlar manualmente el rate limit mediante el plugin.
+  "keybinds": {
+    "session.redo": "none"
+  },
+  "animations": true,
+  "session": {
+    "thinking": "show",
+    "markdown": "rendered"
+  },
+  "debug": {
+    "devtools": false,
+    "turn_tokens": false
+  },
+  "theme": {
+    "mode": "dark"
+  }
+}

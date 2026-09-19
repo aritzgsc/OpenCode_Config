@@ -1,0 +1,16 @@
+node_modules/
+package.json
+package-lock.json
+bun.lock
+.env
+service.json
+*.db
+*.log
+logs/
+*.exe
+ngrok-*.yml
+server.yml
+antigravity-accounts.json
+antigravity-accounts.json.*.tmp
+antigravity-signature-cache.json
+antigravity-logs/

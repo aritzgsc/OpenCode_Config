@@ -1,0 +1,104 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // ── Modelos ────────────────────────────────────────────────────────────
+  // Mantén aquí tus modelos reales. Los agentes que no fijan "model" en su
+  // frontmatter heredan estos valores.
+  // NOTA V2: la raíz "model" no conserva "#variant" (ver docs /models).
+  // Antes era "...#xhigh"; el variant se selecciona por agente/comando.
+  "model": "opencode/muse-spark-1.3-contributor-free#xhigh",
+
+  // ── Agente por defecto ────────────────────────────────────────────────
+  // El pipeline completo solo arranca mediante /init. Para tareas puntuales
+  // se conserva el agente nativo "build".
+  "default_agent": "build",
+
+  // ── Profundidad de subagentes ─────────────────────────────────────────
+  // FASE 1: @orchestrator -> @developer
+  // FASE 2: @developer -> @frontend-expert + @backend-expert
+  // 2 es el mínimo para permitir esta única capa de delegación anidada.
+  // NOTA V2: "subagent_depth" top-level está aceptado pero sin efecto;
+  // la forma nativa es "experimental.subagent_depth".
+  "experimental": {
+    "subagent_depth": 2
+  },
+
+  // ── MCP ────────────────────────────────────────────────────────────────
+  // Playwright MCP queda preparado para añadir herramientas/contexto de
+  // navegador a todas las sesiones globales.
+  "mcp": {
+    "servers": {
+      "playwright": {
+        "type": "local",
+        "command": ["npx", "-y", "@playwright/mcp@latest"],
+        "disabled": false
+      }
+    }
+  },
+
+  // ── Provider: Google / Antigravity ─────────────────────────────────────
+  // NOTA V2: "provider" → "providers"; "modalities" → "capabilities"
+  // (V2 exige además "tools" booleano: true, como los modelos de chat);
+  // "variants" objeto → array con "id" + "settings".
+  "providers": {
+    "google": {
+      "models": {
+        "antigravity-gemini-3-pro": {
+          "name": "Gemini 3 Pro (Antigravity)",
+          "limit": { "context": 1048576, "output": 65535 },
+          "capabilities": { "tools": true, "input": ["text", "image", "pdf"], "output": ["text"] },
+          "variants": [
+            { "id": "low", "settings": { "thinkingLevel": "low" } },
+            { "id": "high", "settings": { "thinkingLevel": "high" } }
+          ]
+        },
+        "antigravity-gemini-3.1-pro": {
+          "name": "Gemini 3.1 Pro (Antigravity)",
+          "limit": { "context": 1048576, "output": 65535 },
+          "capabilities": { "tools": true, "input": ["text", "image", "pdf"], "output": ["text"] },
+          "variants": [
+            { "id": "low", "settings": { "thinkingLevel": "low" } },
+            { "id": "high", "settings": { "thinkingLevel": "high" } }
+          ]
+        },
+        "antigravity-gemini-3.7-flash": {
+          "name": "Gemini 3.7 Flash (Antigravity)",
+          "limit": { "context": 1048576, "output": 65536 },
+          "capabilities": { "tools": true, "input": ["text", "image", "pdf"], "output": ["text"] },
+          "variants": [
+            { "id": "low", "settings": { "thinkingLevel": "low" } },
+            { "id": "medium", "settings": { "thinkingLevel": "medium" } },
+            { "id": "high", "settings": { "thinkingLevel": "high" } }
+          ]
+        },
+        "antigravity-claude-sonnet-4-6": {
+          "name": "Claude Sonnet 4.6 (Antigravity)",
+          "limit": { "context": 200000, "output": 64000 },
+          "capabilities": { "tools": true, "input": ["text", "image", "pdf"], "output": ["text"] }
+        },
+        "antigravity-claude-opus-4-6-thinking": {
+          "name": "Claude Opus 4.6 Thinking (Antigravity)",
+          "limit": { "context": 200000, "output": 64000 },
+          "capabilities": { "tools": true, "input": ["text", "image", "pdf"], "output": ["text"] },
+          "variants": [
+            { "id": "low", "settings": { "thinkingConfig": { "thinkingBudget": 8192 } } },
+            { "id": "max", "settings": { "thinkingConfig": { "thinkingBudget": 32768 } } }
+          ]
+        }
+      }
+    }
+  },
+
+  // ── Watcher ────────────────────────────────────────────────────────────
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      ".git/**",
+      "__pycache__/**",
+      "*.pyc",
+      "*.log"
+    ]
+  }
+}

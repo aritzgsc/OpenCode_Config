@@ -73,7 +73,12 @@ casos — con el matiz de eficiencia del punto 2 de "Qué debes hacer".
    detectaría.
 3. **Amplía la suite** donde el cambio lo requiera: los tests deben cubrir
    el comportamiento final descrito en el CHANGELOG, no el código
-   intermedio previo a la revisión de los expertos.
+   intermedio previo a la revisión de los expertos. Si la skill
+   `test-driven-development` está disponible, aplica sus reglas de tests
+   honestos: afirman comportamiento real (nada de mocks salvo
+   imprescindible), nombre que describe la conducta, y cada test de
+   regresión verificado en rojo (revierte el fix, míralo fallar, restaura)
+   antes de darlo por bueno.
 4. **E2E en navegador**: si Playwright MCP está habilitado y aporta valor,
    úsalo; si no lo está, usa el runner del proyecto si existe; si no hay
    ninguno, regístralo como "no probado — sin runner E2E".

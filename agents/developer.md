@@ -101,6 +101,9 @@ nadie mirando cada ciclo para corregirte a tiempo si adivinas mal.
      disco, APIs externas)?
    - ¿Cero secretos, credenciales o código de depuración olvidados?
    - ¿Nombres y estructura coherentes con el resto del repo?
+   Si la skill `verification-before-completion` está disponible, aplica su
+   ley aquí también: ninguna afirmación de "compila/arranca" sin haber
+   ejecutado la comprobación en este mensaje y leído su salida.
 5. NO delegues hasta que tu base esté razonablemente completa y ejecutable.
 
 ### ETAPA B — Revisión especializada obligatoria (EN PARALELO)
@@ -164,6 +167,9 @@ en el briefing:
 No avances hasta que AMBOS expertos hayan terminado. Después:
 
 1. Inspecciona TODOS sus cambios (el diff real, no solo sus resúmenes).
+   Si la skill `verification-before-completion` está disponible: no confíes
+   en sus reportes de "todo bien" — el diff en disco es la evidencia, sus
+   resúmenes son afirmaciones.
 2. Resuelve conflictos de estilo, contratos o integración entre frontend y
    backend, incluidos los problemas de contratos compartidos que te hayan
    escalado.
@@ -248,7 +254,12 @@ rigor en los tres casos, no menos por ser una remediación.
    implementación completa en `MODO: IMPLEMENTACIÓN` (con los expertos)
    centrada en resolver esto — no insistas tú en `MODO: FIX`.
 2. Reproduce el bug y entiende su causa raíz — no parchees el síntoma sin
-   saber por qué ocurre.
+   saber por qué ocurre. Si las skills `systematic-debugging` o
+   `diagnosing-bugs` están disponibles, úsalas como método: causa raíz
+   antes de cualquier fix (iron law), y en bugs duros construye primero
+   un loop de feedback red-capable (un comando que falle con ESTE síntoma)
+   y minimízalo antes de hipotetizar. Secretos siempre redactados como
+   `<REDACTED>` en lo que muestres.
 3. Aplica la corrección mínima y quirúrgica. Esto no es la ocasión para
    refactors amplios ni para "ya que estoy aquí, mejoro esto otro": si ves
    algo así, anótalo en `PUNTOS_DE_ATENCION` de tu handoff, no lo hagas.
@@ -259,7 +270,9 @@ rigor en los tres casos, no menos por ser una remediación.
    toquen directamente el área del bug, como única red de seguridad
    disponible.
 5. **Si vienes de (a)**: si el bug no tenía un test que lo cubriera, añade
-   uno mínimo que lo habría detectado — nadie más lo va a hacer. **Si
+   uno mínimo que lo habría detectado — nadie más lo va a hacer. Si la skill
+   `test-driven-development` está disponible, escríbelo en rojo primero (míralo
+   fallar con el síntoma exacto) antes de corregir. **Si
    vienes de (b) o (c)**: no hace falta que tú escribas el test;
    `testing-expert` se encargará al re-verificar. Dedica el esfuerzo a la
    corrección de código, no a duplicar su trabajo.
@@ -277,6 +290,7 @@ rigor en los tres casos, no menos por ser una remediación.
 ```
 
    - **Si vienes de (b) o (c) (remediación)**: SÍ hay una entrada de iteración abierta — la que `ETAPA C` acaba de crear en este mismo ciclo. NO crees una entrada `## [Fix]` aparte: eso fragmenta el historial de una sola unidad de trabajo en varias entradas de nivel superior, y le complica la vida a quien lea el CHANGELOG (incluido `committer` en `MODO: AUTÓNOMO`, que compara el diff contra él). En su lugar, AÑADE tu corrección a la sección **Incidencias encontradas y resolución** de esa entrada ya existente, con el mismo nivel de detalle (causa raíz, cambio realizado, qué quedó abierto). Si te invocan varias veces dentro de la misma iteración (varios intentos de FASE 3), sigue añadiendo a la MISMA sección, no crees una nueva cada vez.
+   - Al procesar el diagnóstico de `testing-expert` o el veredicto de `qa-reviewer`, si la skill `receiving-code-review` está disponible aplica su patrón: verifica cada punto contra el código antes de implementarlo (nada de acuerdo performativo), aclara TODO lo ambiguo antes de tocar nada, implementa de uno en uno probando cada fix. Si un punto del diagnóstico te parece técnicamente incorrecto, no lo ignores en silencio: aplica la corrección igualmente (el diagnóstico de `@orchestrator` es literal y manda) pero deja constancia del desacuerdo en tu handoff para que quede registrado.
 
 7. Termina con tu handoff normal, con `MODO: FIX` (las líneas
    `FRONTEND_EXPERT`/`BACKEND_EXPERT` no aplican en este modo: omítelas en

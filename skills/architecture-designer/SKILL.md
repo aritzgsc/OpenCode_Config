@@ -14,6 +14,10 @@ metadata:
   pero tiene que ser una razón real, no "es el que mejor conozco")
 - ¿La base de datos elegida encaja con el patrón de acceso a datos
   esperado (lecturas vs escrituras, consistencia necesaria, volumen)?
+- Si la skill `backend-development` está disponible, contrasta la
+  elección con su matriz de decisión (lenguaje/framework/BBDD/API) y sus
+  referencias (`backend-architecture.md`, `backend-api-design.md`) antes
+  de fijarla.
 
 **Componentes**
 - ¿Cada componente tiene una responsabilidad clara y no solapada con

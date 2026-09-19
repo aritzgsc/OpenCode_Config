@@ -1,6 +1,6 @@
 ---
 name: code-auditor
-description: Checklist de autorrevisión de código antes de darlo por terminado — nombres, manejo de errores, edge cases, TODOs. Úsala desde @developer sobre su propio código justo antes de entregarlo.
+description: Checklist de autorrevisión de código antes de darlo por terminado — nombres, manejo de errores, edge cases, TODOs y mínimo de production-readiness. Úsala desde @developer sobre su propio código justo antes de entregarlo.
 license: MIT
 compatibility: opencode
 metadata:
@@ -19,6 +19,13 @@ metadata:
 - ¿Los nombres de variables/funciones dicen qué hacen sin necesitar el
   comentario de al lado?
 - ¿Hay lógica duplicada que debería extraerse?
+
+**Production-readiness mínimo**
+- ¿Cero secretos, credenciales o código de depuración olvidados?
+- ¿Los errores se registran con contexto útil y sin datos sensibles?
+- Si expone un servicio: ¿tiene forma de saber si está vivo (health
+  check) y de limitar el abuso (tamaños, rate) o está documentado por
+  qué no lo necesita?
 
 **Consistencia con ARCHITECTURE.md**
 - ¿Sigue la estructura de carpetas y patrones que definió `@architect`?

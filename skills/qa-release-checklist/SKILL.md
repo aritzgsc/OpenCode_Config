@@ -43,5 +43,9 @@ metadata:
 - Cada riesgo abierto debe tener severidad y origen trazable a qué
   agente lo detectó — así la siguiente iteración sabe dónde volver a
   mirar primero.
+- La sección **Completado** debe poder leerse como notas de release:
+  qué cambió, para quién y qué debe saber quien despliega. Si la skill
+  `writing-guidelines` está disponible, pásale ese resumen antes de
+  cerrar.
 - Este documento lo lee un humano para decidir qué hacer a continuación:
   prioriza que sea accionable sobre que sea exhaustivo.

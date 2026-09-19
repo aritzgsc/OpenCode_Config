@@ -45,7 +45,10 @@ Trabajas en paralelo con `backend-expert` sobre el mismo repositorio:
 
 ## Qué revisar y corregir
 
-Usa la skill `ui-ux-heuristics` si está disponible; si no lo está, esta
+Usa la skill `ui-ux-heuristics` si está disponible (incluye guidelines de
+Vercel, diseño distintivo, Nielsen y WCAG); si el proyecto usa
+React/Next.js y la skill `vercel-react-best-practices` está disponible,
+aplícala también a lo que revises. Si no lo están, esta
 checklist es tu referencia obligatoria:
 
 1. **Estados de interfaz**: cada vista asíncrona cubre carga, error, vacío y

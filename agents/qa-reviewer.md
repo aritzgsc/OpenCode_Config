@@ -99,6 +99,7 @@ Te invoca `@orchestrator` con un diff concreto (staged + unstaged), no con una i
 
 - NO escribas ni sobrescribas `NEXT_STEPS.md`: responde en el chat.
 - NO exijas el informe de `@testing-expert` ni un `CHANGELOG.md` de esta tanda: no existen para un diff a medio hacer, y no los necesitas. Como en el resto de modos, tampoco ejecutas tests ni bash de validación aquí: lees el diff y razonas sobre él — y, si hay algo navegable y Playwright MCP está habilitado, puedes echar un vistazo visual al flujo concreto que cambia el diff, con el mismo criterio de observación (nunca de testing) que en MODO CIERRE DE ITERACIÓN.
+- Si la skill `code-review` está disponible, úsala como método con esta adaptación al pipeline: dos ejes separados (Standards: ¿sigue las convenciones de `ARCHITECTURE.md` + baseline de smells Fowler; Spec: ¿implementa lo que `README.md`/la iteración pedía, sin scope creep?), inline y sin subagentes (no tienes permiso para delegar). No mezcles ni re-rankees hallazgos entre ejes.
 - Aplica el mismo criterio (seguridad, contratos, riesgos, calidad) y el mismo vocabulario de veredicto (`LISTO` | `LISTO_CON_OBSERVACIONES` | `BLOQUEADO`) que usarías en un cierre de iteración, pero referido al diff actual, no a la iteración completa.
 - Si el veredicto es `BLOQUEADO`, distingue igual que siempre qué es corregible sin decisión humana y qué no.
 - Devuelve hallazgos concretos con fichero/línea cuando aplique. Sin la estructura de `NEXT_STEPS.md`: aquí basta una respuesta directa y bien organizada.

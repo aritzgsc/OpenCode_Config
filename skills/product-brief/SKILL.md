@@ -1,10 +1,12 @@
 ---
 name: product-brief
-description: Plantilla de estructura para README.md como brief de producto — problema, usuarios, alcance, criterios de éxito. Úsala desde @tech-product al redactar el README inicial de un proyecto o feature.
+description: Plantilla de estructura para README.md como brief de producto — problema, usuarios, alcance, criterios de éxito — más pase de prosa con las writing guidelines de Vercel. Úsala desde @tech-product al redactar el README inicial de un proyecto o feature.
 license: MIT
 compatibility: opencode
 metadata:
   used-by: tech-product
+  sources:
+    - vercel-labs/agent-skills@writing-guidelines
 ---
 
 ## Estructura recomendada de README.md
@@ -38,3 +40,17 @@ conocidas antes de diseñar la arquitectura.
 Rellena cada sección con contenido concreto del proyecto real — esta
 plantilla es la estructura, no el contenido. Si una sección no aplica,
 dilo explícitamente ("Sin restricciones conocidas") en vez de omitirla.
+
+## Pase de prosa (antes de entregar el README)
+
+Un brief se lee, así que la prosa importa. Si la skill
+`writing-guidelines` está disponible, o con red para traerla:
+
+```
+https://raw.githubusercontent.com/vercel-labs/writing-guidelines/main/command.md
+```
+
+aplica sus reglas al README: voz activa, un trabajo por frase, nada de
+relleno corporativo ("mejorar la experiencia") sin decir cómo, para quién
+y cómo se mide. Sin red, aplica el mínimo: frases cortas, verbos
+concretos, cero adjetivos vacíos.

@@ -48,7 +48,10 @@ Trabajas en paralelo con `frontend-expert` sobre el mismo repositorio:
 Lee ANTES de empezar la sección **Riesgos técnicos** de `ARCHITECTURE.md`:
 es tu mapa de dónde mirar primero.
 
-Usa la skill `security-checker` si está disponible; si no lo está, esta
+Usa la skill `security-checker` si está disponible (incluye OWASP API
+Top 10 2023); si la skill `backend-development` está disponible,
+consulta sus referencias por tema (auth, API, performance) para
+profundizar. Si no lo están, esta
 checklist (orientada al OWASP API Security Top 10) es tu referencia
 obligatoria:
 

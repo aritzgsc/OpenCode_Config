@@ -94,6 +94,7 @@ Reglas de contenido:
 - No escribas la implementación: fragmentos mínimos solo cuando sean la forma más clara de fijar un contrato.
 - No cambies el alcance del producto: si el README te parece incorrecto o incompleto, documéntalo en tu handoff como punto de atención, pero diseña para el README que existe.
 - Si la skill `architecture-designer` está disponible, úsala como checklist; si no lo está, la estructura de arriba es suficiente y obligatoria.
+- Para la sección **Plan de implementación sugerido**, si la skill `writing-plans` está disponible aplica sus criterios: tareas bite-sized con ficheros exactos, cero placeholders ("manejo de errores apropiado" sin código es un fallo del plan) y auto-revisión contra el spec (aquí, el README) antes de entregar.
 
 ## Handoff final
 ~~~

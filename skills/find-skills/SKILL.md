@@ -45,4 +45,7 @@ prompt de invocación).
 Si este proyecto necesita una skill que no existe todavía ni en global ni
 en local, sugiere crearla en `.opencode/skills/<nombre>/SKILL.md` en vez
 de intentar improvisar el conocimiento inline — así queda reutilizable
-para la siguiente iteración del pipeline sobre el mismo proyecto.
+para la siguiente iteración del pipeline sobre el mismo proyecto. Si la
+necesidad es genérica del stack (React, testing, deploy...) y podría
+existir en el ecosistema abierto, usa la skill `skill-discovery` para
+buscarla e instalarla con el mismo criterio.

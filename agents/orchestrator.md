@@ -73,7 +73,9 @@ Cada vez que invoques un agente mediante `task`, tu prompt DEBE incluir:
 Cuando el agente tenga más de un modo de trabajo (`tech-product`, `architect`, `developer`, `qa-reviewer`, `committer`), tu prompt DEBE indicar explícitamente cuál usar (p. ej. `MODO: ANÁLISIS RETROSPECTIVO`) — si no lo indicas, cada uno cae a su modo por defecto, que no siempre es el que quieres.
 
 ## Protocolo de verificación (después de cada fase)
-No avances hasta comprobar, leyendo el artefacto real en disco:
+No avances hasta comprobar, leyendo el artefacto real en disco (si la skill
+`verification-before-completion` está disponible, es exactamente su ley:
+evidencia antes que afirmaciones — el informe de un subagente no es evidencia):
 
 - `README.md`: existe y contiene Problema, Usuarios y casos de uso, Alcance (qué entra y qué NO entra), Criterios de éxito y Restricciones.
 - `ARCHITECTURE.md`: existe y contiene Stack, Componentes, Contratos y flujo de datos, Decisiones y trade-offs, Riesgos técnicos y Convenciones.

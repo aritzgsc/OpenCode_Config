@@ -4,7 +4,8 @@
 # (contiene el dominio real del túnel ntfy).
 # `addr` debe ser el MISMO puerto local que `listen-http` en `server.yml`
 # (el `8090` de ejemplo se sustituye por ese puerto real). El `authtoken`
-# de esta cuenta vive solo en la máquina, nunca en el repo.
+# de esta cuenta vive solo en la variable `NGROK_AUTHTOKEN` de su servicio
+# nssm (ver `nssm-register.ps1`), nunca en este fichero ni en el repo.
 
 version: "3"
 tunnels:

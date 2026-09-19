@@ -6,7 +6,8 @@
 # `tu@email.com` = email de la cuenta OAuth, `58941` = puerto local del
 # servidor explícito (coherente con `OPENCODE_SERVER_PORT` en `.env.example`
 # de la rama `config`). El `authtoken` de esta cuenta vive solo en la
-# máquina, nunca en el repo.
+# variable `NGROK_AUTHTOKEN` de su servicio nssm (ver `nssm-register.ps1`),
+# nunca en este fichero ni en el repo.
 
 version: "3"
 tunnels:

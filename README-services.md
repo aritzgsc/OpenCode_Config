@@ -38,6 +38,23 @@ Si una cuenta pierde su dominio o rota su `authtoken`, solo cae ese túnel:
 re-copiar el `*.yml` real correspondiente y reiniciar solo su servicio.
 Nunca versionar `authtoken`, dominios reales ni emails reales.
 
+## Variables de entorno de los servicios
+
+Cada túnel ngrok se autentica con el `authtoken` de SU cuenta (3 distintos,
+uno por cuenta) configurado como variable de entorno del servicio nssm
+(`AppEnvironmentExtra`), nunca en el `*.yml`:
+
+| Servicio nssm | Variable | Valor |
+|---|---|---|
+| `TunnelNgrokOpencode` | `NGROK_AUTHTOKEN` | `***` (authtoken de la cuenta 1) |
+| `TunnelNgrokNtfy` | `NGROK_AUTHTOKEN` | `***` (authtoken de la cuenta 2) |
+| `TunnelNgrokCuestionario` | `NGROK_AUTHTOKEN` | `***` (authtoken de la cuenta 3) |
+| `ServidorNtfy` | — | ninguna |
+
+Lo pone `examples/nssm-register.ps1` durante el alta. Para consultar el de
+un servicio ya creado: `nssm get <Servicio> AppEnvironmentExtra` en una
+consola (los valores solo viven en la máquina, jamás en el repo).
+
 ## Qué copiar a `C:/ProgramData/opencode`
 
 | Fichero en `examples/` | Destino real | Qué sustituir |

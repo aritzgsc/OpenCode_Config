@@ -8,3 +8,9 @@ nssm install TunnelNgrokOpencode "C:\ProgramData\opencode\ngrok.exe" "start --co
 nssm install TunnelNgrokNtfy "C:\ProgramData\opencode\ngrok.exe" "start --config C:\ProgramData\opencode\ngrok-ntfy.yml ntfy-tunnel"
 nssm install TunnelNgrokCuestionario "C:\ProgramData\opencode\ngrok.exe" "start --config C:\ProgramData\opencode\ngrok-cuestionario.yml cuestionario-tunnel"
 # Dominios/emails reales NUNCA aquí: ver examples/ngrok-*.yml con tu-dominio.ngrok-free.dev y tu@email.com
+# Variables de entorno (una por túnel, cada una con el authtoken de SU cuenta:
+# 3 cuentas ngrok separadas). NUNCA en el *.yml, NUNCA en el repo.
+# ServidorNtfy no lleva ninguna.
+nssm set TunnelNgrokOpencode AppEnvironmentExtra "NGROK_AUTHTOKEN=***"
+nssm set TunnelNgrokNtfy AppEnvironmentExtra "NGROK_AUTHTOKEN=***"
+nssm set TunnelNgrokCuestionario AppEnvironmentExtra "NGROK_AUTHTOKEN=***"

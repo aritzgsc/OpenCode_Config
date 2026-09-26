@@ -51,8 +51,17 @@ rate-limit en los eventos V2 (`session.retry.scheduled`,
 `session.step.failed` / `session.execution.failed` / `session.tool.failed`
 con `error.status === 429` o `error.type === "provider.quota"`, más
 `session.status` con `type: retry` como compat) y lanzar
-`hooks/rate_limit_handler.bat`.
+`hooks/rate_limit/rate_limit_handler.bat`, que pide un circuito nuevo a Tor
+(`rotate_tor.ps1` → `AUTHENTICATE` + `SIGNAL NEWNYM` contra el ControlPort).
 OpenCode sigue siendo quien controla sus propios reintentos.
+
+La rotación solo se ejecuta cuando el wrapper está activo
+(`OPENCODE_TOR_RATE_LIMIT_ROTATION_ENABLED=true`, fijada solo en el entorno
+del wrapper); fuera del wrapper el plugin queda en modo observación.
+Hay cooldown entre rotaciones, y `Ctrl+R` (AutoHotkey,
+`hooks/rate_limit/rotar_ip.ahk`) permite una rotación manual.
+`SIGNAL NEWNYM` pide circuitos nuevos pero no garantiza una IP de salida
+distinta (Tor puede reutilizar el mismo relay de salida).
 
 ## MCP y plugins externos
 

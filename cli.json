@@ -11,7 +11,7 @@
     "markdown": "rendered"
   },
   "debug": {
-    "devtools": true,
+    "devtools": false,
     "turn_tokens": false
   },
   "theme": {

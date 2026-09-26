@@ -4,3 +4,4 @@ Stop-Service TunnelNgrokCuestionario
 Stop-Service TunnelNgrokOpencode
 Stop-Service TunnelNgrokNtfy
 Stop-Service ServidorNtfy
+Stop-Service privoxy

@@ -1,0 +1,21 @@
+# ============================================================
+# Tor standalone para OpenCode — PLANTILLA PÚBLICA
+# Copiar a la ruta de OPENCODE_TORRC y generar el hash EN LA MÁQUINA:
+# tor.exe --hash-password "<tu-secreto>"
+# (ese mismo secreto va a OPENCODE_TOR_CONTROL_PASSWORD en .env)
+# Este fichero NUNCA lleva valores reales: solo placeholders.
+# El torrc real está en .gitignore y jamás se versiona.
+# ============================================================
+
+SocksPort 127.0.0.1:9050
+
+ControlPort 127.0.0.1:9051
+
+CookieAuthentication 0
+
+# Sustituir por la salida real de tor.exe --hash-password.
+HashedControlPassword ***
+
+DataDirectory C:\Users\TU_USUARIO\.config\opencode\tor-data
+
+Log notice file C:\Users\TU_USUARIO\.config\opencode\logs\tor.log
